@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transmission Manpower Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{--bar:#ffffffee;--soft:#f4f7f9;--code:#e3eaef;--inp:#fff;--tl:#0f6b78;--ink:#10212e;--mut:#5d6f7e;--bg:#edf1f4;--card:#fff;--line:#d5dde3;--hero:#0a2a35;--teal:#0f6b78;--bud:#9fb3c1;--red:#c8412b;--grn:#2e8b57;--blu:#2f6fb5;--amb:#e0a526}
+html[data-theme=dark]{--bar:#0b1820ee;--soft:#183039;--code:#1d3440;--inp:#0f1f28;--tl:#5cc2d1;--ink:#e4ecf1;--mut:#8fa3b1;--bg:#0b1820;--card:#12232d;--line:#26394a;--hero:#06141b;--teal:#2a8c9c;--red:#e5604a;--grn:#4cb97f}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:Barlow,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.45}
+h1,h2,.num{font-family:"Barlow Condensed",Barlow,sans-serif;letter-spacing:.2px}
+header{background:var(--hero);color:#fff;position:relative;overflow:hidden;padding:28px max(20px,5vw) 70px}
+header h1{font-size:clamp(30px,4.4vw,50px);margin:0;font-weight:700;line-height:1.05}
+header p{margin:8px 0 0;color:#a9c7cf;max-width:60ch}
+header svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:90px;opacity:.9}
+.bar{position:sticky;top:0;z-index:5;background:var(--bar);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;padding:10px max(20px,5vw)}
+.bar label{font-size:13px;color:var(--mut);display:flex;flex-direction:column;gap:2px}
+select,input[type=search]{font:inherit;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:var(--inp);color:var(--ink);min-width:150px}
+button,.btn{font:inherit;font-weight:600;padding:8px 14px;border-radius:6px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer}
+button.ghost,.btn.ghost{background:var(--inp);color:var(--tl)}
+:focus-visible{outline:3px solid var(--amb);outline-offset:2px}
+.sp{flex:1}
+#src{font-size:13px;color:var(--mut)}
+main{padding:22px max(20px,5vw) 50px;max-width:1500px;margin:0 auto}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 18px #0a2a3514}
+.kpi{padding:16px 18px;border-right:1px solid var(--line)}
+.kpi:last-child{border:0}
+.kpi small{color:var(--mut);display:block}
+.kpi .num{font-size:34px;font-weight:700;line-height:1.1;margin:2px 0}
+.kpi span{font-size:13px;color:var(--mut)}
+.up{color:var(--red)!important}.dn{color:var(--grn)!important}
+.ins{margin:22px 0;background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amb);border-radius:10px;padding:16px 22px}
+.ins h2{margin:0 0 6px;font-size:24px}
+.ins ul{margin:0;padding-left:18px;columns:2 380px;column-gap:36px}
+.ins li{margin:0 0 7px;break-inside:avoid}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,520px),1fr));gap:18px}
+.ch{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px 10px}
+.ch h2{font-size:21px;margin:0}
+.ch p{margin:0 0 8px;color:var(--mut);font-size:13px}
+.ch div{position:relative;height:290px}
+.tw{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.th{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:14px 16px}
+.th h2{margin:0;font-size:22px}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:900px}
+th,td{padding:8px 12px;text-align:right;border-top:1px solid var(--line);white-space:nowrap}
+th{background:var(--soft);color:var(--mut);font-weight:600;cursor:pointer;font-size:13px;user-select:none}
+th:nth-child(-n+3),td:nth-child(-n+3){text-align:left}
+td:first-child{font-weight:600;color:var(--tl)}
+.pill{padding:2px 9px;border-radius:99px;font-size:12px;font-weight:600;color:#fff}
+.o{background:var(--red)}.k{background:var(--grn)}.u{background:var(--blu)}
+.vb{display:inline-block;height:5px;border-radius:3px;vertical-align:middle;margin-left:6px}
+tfoot td{font-weight:700;background:var(--soft)}
+footer{color:var(--mut);font-size:13px;margin-top:20px}
+.cr{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);font-weight:500;color:var(--ink)}
+code{background:var(--code);padding:1px 5px;border-radius:4px}
+@media(max-width:640px){.kpi{border-right:0;border-bottom:1px solid var(--line)}.ch div{height:250px}}
+@media print{.bar,header svg{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>Transmission Manpower Dashboard</h1>
+  <p>Budget vs actual headcount and cost by task number, across the whole transmission portfolio.</p>
+  <svg viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="#3f8c9b" stroke-width="1.4">
+    <defs><g id="tw"><path d="M0 0L-14 90M0 0L14 90M-9 40H9M-5 20H5M-14 90L9 40M14 90L-9 40M-24 24H24M-24 24L0 12L24 24"/></g></defs>
+    <use href="#tw" x="100"/><use href="#tw" x="400"/><use href="#tw" x="700"/><use href="#tw" x="1000"/>
+    <g stroke="#7fb9c5" stroke-width="1"><path d="M-30 20Q35 52 76 24Q250 62 376 24Q550 62 676 24Q850 62 976 24Q1100 58 1230 20"/><path d="M-30 24Q40 56 76 24M124 24Q250 66 376 24M424 24Q550 66 676 24M724 24Q850 66 976 24M1024 24Q1110 60 1230 24" opacity=".6"/></g>
+  </svg>
+</header>
+
+<div class="bar">
+  <label>Project<select id="fp"></select></label>
+  <label>Position<select id="fq"></select></label>
+  <label>Actuals through<select id="fm"></select></label>
+  <span class="sp"></span>
+  <span id="src">Sample data</span>
+  <input id="file" type="file" accept=".xlsx,.xls,.csv" hidden>
+  <button class="ghost" id="theme">Dark mode</button>
+  <button class="ghost" id="tpl">Download template</button>
+  <button id="up">Upload Excel</button>
+</div>
+
+<main>
+  <section class="kpis" id="kpis"></section>
+  <section class="ins"><h2>What the data says</h2><ul id="ins"></ul></section>
+  <section class="grid">
+    <div class="ch"><h2>Monthly cost</h2><p>Budget vs actual. Months without actuals show budget only.</p><div><canvas id="c1"></canvas></div></div>
+    <div class="ch"><h2>Monthly headcount</h2><p>Positions budgeted vs positions on payroll.</p><div><canvas id="c2"></canvas></div></div>
+    <div class="ch"><h2>Cumulative cost curve</h2><p>Actual spend against the full-year budget curve.</p><div><canvas id="c3"></canvas></div></div>
+    <div class="ch"><h2>Cost variance by project</h2><p>Actual minus budget. Red is overspend.</p><div><canvas id="c4"></canvas></div></div>
+    <div class="ch"><h2>Why cost moved: headcount or rate</h2><p>Volume = more or fewer people. Rate = cost per person.</p><div><canvas id="c5"></canvas></div></div>
+    <div class="ch"><h2>Cost variance by position</h2><p>Which roles drive the gap.</p><div><canvas id="c6"></canvas></div></div>
+  </section>
+
+  <section class="tw">
+    <div class="th"><h2>Task number report</h2><span class="sp"></span>
+      <input type="search" id="q" placeholder="Search task, project or position"><button class="ghost" id="csv">Export CSV</button></div>
+    <div class="scroll"><table><thead><tr id="thead"></tr></thead><tbody id="tb"></tbody><tfoot id="tf"></tfoot></table></div>
+  </section>
+  <footer>Upload an Excel sheet with one row per task per month. Columns: <code>Task</code> <code>Project</code> <code>Position</code> <code>Month</code> <code>BudgetHC</code> <code>BudgetCost</code> <code>ActualHC</code> <code>ActualCost</code>. Leave the actual columns empty for future months. Your data stays in your browser.
+  <div class="cr">Generated by Ahmed Mohsen Morad - Senior Project Controls Engineer</div></footer>
+</main>
+
+<script>
+const CUR='SAR', MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const $=i=>document.getElementById(i);
+const sum=(a,k)=>a.reduce((s,x)=>s+(x[k]||0),0);
+const f=n=>Math.round(n).toLocaleString('en-US');
+const fk=n=>{const a=Math.abs(n),s=n<0?'-':'';return s+(a>=1e6?(a/1e6).toFixed(2)+'M':a>=1e3?(a/1e3).toFixed(0)+'K':a.toFixed(0))};
+const pc=(a,b)=>b?(a-b)/b*100:0;
+const ml=m=>MN[+m.slice(5)-1]+' '+m.slice(2,4);
+let DATA=[],charts={},sortK='v',sortD=-1;
+Chart.defaults.font.family='Barlow,sans-serif';Chart.defaults.color='#4a5c6a';
+const C={bud:'#9fb3c1',act:'#0f6b78',red:'#c8412b',grn:'#2e8b57',amb:'#e0a526'};
+
+/* ---------- sample data ---------- */
+function sample(){
+  let s=20260;const r=()=>(s=s*16807%2147483647)/2147483647;
+  const rate={'Project Manager':38000,'Construction Manager':32000,'Planner':16000,'Site Engineer':18000,'Electrical Engineer':20000,'QA/QC Engineer':17000,'HSE Officer':14000,'Surveyor':11000,'Foreman':9000,'Document Controller':8000,'Quantity Surveyor':19000};
+  const prof=[.5,.7,.9,1,1,1,1,1,.9,.8,.6,.4];
+  const P=[
+   ['P101','400kV OHL Tabuk-Madinah',0,1.06,.03,{'Project Manager':1,'Construction Manager':2,'Site Engineer':8,'Electrical Engineer':3,'QA/QC Engineer':3,'HSE Officer':4,'Surveyor':4,'Foreman':10,'Planner':1,'Document Controller':2}],
+   ['P102','380kV GIS Substation Riyadh North',1,1.0,.0,{'Project Manager':1,'Construction Manager':1,'Site Engineer':5,'Electrical Engineer':6,'QA/QC Engineer':3,'HSE Officer':3,'Foreman':6,'Planner':1,'Quantity Surveyor':1,'Document Controller':2}],
+   ['P103','230kV Underground Cable Jeddah',0,1.15,.07,{'Project Manager':1,'Construction Manager':1,'Site Engineer':6,'Electrical Engineer':4,'QA/QC Engineer':2,'HSE Officer':3,'Surveyor':2,'Foreman':8,'Quantity Surveyor':1}],
+   ['P104','HVDC Converter Station',2,.93,.02,{'Project Manager':1,'Construction Manager':2,'Site Engineer':7,'Electrical Engineer':8,'QA/QC Engineer':4,'HSE Officer':4,'Planner':2,'Quantity Surveyor':2,'Document Controller':3}],
+   ['P105','132kV OHL Upgrade Eastern',1,.9,-.04,{'Project Manager':1,'Site Engineer':4,'Electrical Engineer':2,'HSE Officer':2,'Surveyor':2,'Foreman':6,'Document Controller':1}],
+   ['P106','SCADA and Protection Retrofit',0,1.02,.05,{'Project Manager':1,'Electrical Engineer':7,'QA/QC Engineer':2,'Planner':1,'HSE Officer':1,'Document Controller':1}]];
+  const out=[];
+  P.forEach(([id,name,sh,hb,rb,pos])=>Object.entries(pos).forEach(([ps,base],k)=>{
+    const task=id+'-'+String(k+1).padStart(2,'0');
+    for(let i=0;i<12;i++){
+      const bHC=Math.round(base*prof[Math.max(0,Math.min(11,i-sh))]);
+      const o={task,project:name,position:ps,month:'2026-'+String(i+1).padStart(2,'0'),bHC,bCost:bHC*rate[ps],act:i<=8,aHC:0,aCost:0};
+      if(o.act){o.aHC=Math.max(0,Math.round(bHC*hb+(r()-.5)*1.7));o.aCost=o.aHC*rate[ps]*(1+rb+(r()-.5)*.08)}
+      out.push(o);
+    }}));
+  return out;
+}
+
+/* ---------- load / controls ---------- */
+function setData(d,label){
+  DATA=d;$('src').textContent=label;
+  const pr=[...new Set(d.map(x=>x.project))].sort(),po=[...new Set(d.map(x=>x.position))].sort();
+  const am=[...new Set(d.filter(x=>x.act).map(x=>x.month))].sort();
+  $('fp').innerHTML='<option value="all">All projects</option>'+pr.map(x=>`<option>${x}</option>`).join('');
+  $('fq').innerHTML='<option value="all">All positions</option>'+po.map(x=>`<option>${x}</option>`).join('');
+  $('fm').innerHTML=am.map(m=>`<option value="${m}">${ml(m)}</option>`).join('');
+  $('fm').value=am[am.length-1]||'';
+  render();
+}
+['fp','fq','fm','q'].forEach(i=>$(i).addEventListener('input',render));
+$('up').onclick=()=>$('file').click();
+$('file').onchange=e=>{
+  const fl=e.target.files[0];if(!fl)return;
+  const rd=new FileReader();
+  rd.onload=ev=>{try{
+    const wb=XLSX.read(ev.target.result,{type:'array',cellDates:true}),rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''});
+    const out=rows.map(x=>{const g={};for(const k in x)g[k.toLowerCase().replace(/[^a-z]/g,'')]=x[k];
+      let m=g.month,mm='';
+      if(m instanceof Date)mm=m.getFullYear()+'-'+String(m.getMonth()+1).padStart(2,'0');
+      else{const t=String(m).match(/^(\d{4})-(\d{1,2})/);if(t)mm=t[1]+'-'+t[2].padStart(2,'0');else{const d=new Date(m);if(!isNaN(d))mm=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}}
+      const has=g.actualcost!==''&&g.actualcost!=null;
+      return{task:String(g.task),project:String(g.project),position:String(g.position),month:mm,bHC:+g.budgethc||0,bCost:+g.budgetcost||0,act:has,aHC:+g.actualhc||0,aCost:+g.actualcost||0}}).filter(x=>x.task&&x.month);
+    if(!out.length)throw new Error('No valid rows');
+    setData(out,fl.name);
+  }catch(err){alert('Could not read the file. Check that the column names match the template. '+err.message)}};
+  rd.readAsArrayBuffer(fl);e.target.value='';
+};
+$('tpl').onclick=()=>{
+  const s=sample().slice(0,24).map(x=>({Task:x.task,Project:x.project,Position:x.position,Month:x.month,BudgetHC:x.bHC,BudgetCost:x.bCost,ActualHC:x.act?x.aHC:'',ActualCost:x.act?Math.round(x.aCost):''}));
+  const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.json_to_sheet(s),'Manpower');XLSX.writeFile(wb,'manpower_template.xlsx');
+};
+
+/* ---------- helpers ---------- */
+function group(rows,key){const m={};rows.forEach(r=>{const k=r[key];(m[k]=m[k]||[]).push(r)});return m}
+function mk(id,cfg){if(charts[id])charts[id].destroy();charts[id]=new Chart($(id),cfg)}
+const hbar=(id,labels,vals)=>mk(id,{type:'bar',data:{labels,datasets:[{data:vals,backgroundColor:vals.map(v=>v>0?C.red:C.grn),borderRadius:3}]},options:{indexAxis:'y',maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>CUR+' '+f(c.raw)}}},scales:{x:{ticks:{callback:fk},grid:{}},y:{grid:{display:false}}}}});
+
+/* ---------- render ---------- */
+function render(){
+  const p=$('fp').value,q=$('fq').value,t=$('fm').value;
+  const scope=DATA.filter(r=>(p==='all'||r.project===p)&&(q==='all'||r.position===q));
+  const td=scope.filter(r=>r.act&&r.month<=t);
+  const months=[...new Set(scope.map(r=>r.month))].sort();
+  const bm={};months.forEach(m=>bm[m]={bH:0,aH:0,bC:0,aC:0,on:false});
+  scope.forEach(r=>{const o=bm[r.month];o.bH+=r.bHC;o.bC+=r.bCost;if(r.act&&r.month<=t){o.aH+=r.aHC;o.aC+=r.aCost;o.on=true}});
+  const nM=new Set(td.map(r=>r.month)).size||1;
+  const B=sum(td,'bCost'),A=sum(td,'aCost'),V=A-B,bH=sum(td,'bHC')/nM,aH=sum(td,'aHC')/nM;
+  const fy=sum(scope,'bCost'),fac=A+sum(scope.filter(r=>r.month>t),'bCost'),rem=fy-B;
+  const cls=v=>v>0?'up':'dn';
+
+  $('kpis').innerHTML=[
+    ['Budget to date',fk(B),`${CUR}, ${nM} months`,''],
+    ['Actual to date',fk(A),`${CUR}, ${pc(A,B)>=0?'+':''}${pc(A,B).toFixed(1)}% vs budget`,cls(V)],
+    ['Cost variance',(V>0?'+':'')+fk(V),V>0?'Over budget':'Under budget',cls(V)],
+    ['Avg headcount',aH.toFixed(0),`Budget ${bH.toFixed(0)}, gap ${(aH-bH>0?'+':'')+(aH-bH).toFixed(0)}`,cls(aH-bH)],
+    ['Full-year budget',fk(fy),`${CUR}, ${fk(rem)} still to spend`,''],
+    ['Forecast at completion',fk(fac),`${(fac-fy>0?'+':'')+fk(fac-fy)} vs full-year budget`,cls(fac-fy)]
+  ].map(k=>`<div class="kpi"><small>${k[0]}</small><div class="num ${k[3]}">${k[1]}</div><span>${k[2]}</span></div>`).join('');
+
+  /* price / volume */
+  const pr={};DATA.forEach(r=>{const o=pr[r.position]=pr[r.position]||{h:0,c:0};o.h+=r.bHC;o.c+=r.bCost});
+  td.forEach(r=>{const pbr=pr[r.position].c/(pr[r.position].h||1),br=r.bHC?r.bCost/r.bHC:pbr,ar=r.aHC?r.aCost/r.aHC:pbr;r.vol=(r.aHC-r.bHC)*br;r.prc=(ar-br)*r.aHC});
+  const byP=group(td,'project'),byQ=group(td,'position'),byT=group(td,'task');
+  const pv=Object.entries(byP).map(([k,a])=>({k,v:sum(a,'aCost')-sum(a,'bCost'),vol:sum(a,'vol'),prc:sum(a,'prc')})).sort((a,b)=>b.v-a.v);
+  const qv=Object.entries(byQ).map(([k,a])=>({k,v:sum(a,'aCost')-sum(a,'bCost')})).sort((a,b)=>b.v-a.v);
+  const tv=Object.entries(byT).map(([k,a])=>({k,v:sum(a,'aCost')-sum(a,'bCost'),a})).sort((a,b)=>b.v-a.v);
+  const vol=sum(td,'vol'),prc=sum(td,'prc');
+  const gaps=months.filter(m=>bm[m].on).map(m=>({m,g:bm[m].aH-bm[m].bH}));
+  const pk=gaps.slice().sort((a,b)=>b.g-a.g)[0];
+  const unb=Object.entries(group(scope.filter(r=>r.act&&!r.bCost&&r.aCost),'task')).length;
+  const I=[];
+  if(td.length){
+    I.push(`Actual cost is <b>${Math.abs(pc(A,B)).toFixed(1)}% ${V>0?'above':'below'}</b> budget (${CUR} ${fk(Math.abs(V))}) after ${nM} months.`);
+    I.push(`Headcount explains <b>${CUR} ${fk(vol)}</b> of the gap and cost per person explains <b>${CUR} ${fk(prc)}</b>. ${Math.abs(vol)>Math.abs(prc)?'Staffing levels are the main lever.':'Rates and overtime are the main lever.'}`);
+    if(pv.length>1)I.push(`<b>${pv[0].k}</b> has the largest overrun (${CUR} ${fk(pv[0].v)}). <b>${pv[pv.length-1].k}</b> is the furthest under budget (${CUR} ${fk(pv[pv.length-1].v)}).`);
+    if(qv.length>1)I.push(`By role, <b>${qv[0].k}</b> adds ${CUR} ${fk(qv[0].v)} over budget. <b>${qv[qv.length-1].k}</b> saves ${CUR} ${fk(Math.abs(qv[qv.length-1].v))}.`);
+    const top3=tv.slice(0,3),ov=sum(tv.filter(x=>x.v>0),'v');
+    if(ov>0)I.push(`Three task numbers (${top3.map(x=>x.k).join(', ')}) account for <b>${(sum(top3,'v')/ov*100).toFixed(0)}%</b> of all overspend. Start the review there.`);
+    if(pk&&pk.g>0)I.push(`Headcount peaked <b>${pk.g} above budget</b> in ${ml(pk.m)}.`);
+    I.push(`At the current run rate the portfolio ends at <b>${CUR} ${fk(fac)}</b>, which is ${fac>fy?fk(fac-fy)+' over':fk(fy-fac)+' under'} the full-year budget. Remaining months are assumed to follow budget.`);
+    if(unb)I.push(`<b>${unb}</b> task number(s) have actual cost but no budget. Check the ERP mapping.`);
+  }else I.push('No actuals found for this selection.');
+  $('ins').innerHTML=I.map(x=>`<li>${x}</li>`).join('');
+
+  /* charts */
+  const L=months.map(ml),act=k=>months.map(m=>bm[m].on?bm[m][k]:null);
+  mk('c1',{type:'bar',data:{labels:L,datasets:[{label:'Budget',data:months.map(m=>bm[m].bC),backgroundColor:C.bud,borderRadius:3},{label:'Actual',data:act('aC'),backgroundColor:C.act,borderRadius:3}]},options:{maintainAspectRatio:false,scales:{y:{ticks:{callback:fk},grid:{}},x:{grid:{display:false}}},plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+CUR+' '+f(c.raw)}}}}});
+  mk('c2',{type:'line',data:{labels:L,datasets:[{label:'Budget HC',data:months.map(m=>bm[m].bH),borderColor:C.bud,borderDash:[6,4],pointRadius:0,borderWidth:3,stepped:true},{label:'Actual HC',data:act('aH'),borderColor:C.act,backgroundColor:C.act,borderWidth:3,pointRadius:3,stepped:true}]},options:{maintainAspectRatio:false,scales:{y:{grid:{},beginAtZero:true},x:{grid:{display:false}}}}});
+  let cb=0,ca=0;
+  mk('c3',{type:'line',data:{labels:L,datasets:[{label:'Cumulative budget',data:months.map(m=>cb+=bm[m].bC),borderColor:C.bud,backgroundColor:'#9fb3c133',fill:true,pointRadius:0,borderWidth:3,tension:.35},{label:'Cumulative actual',data:months.map(m=>bm[m].on?ca+=bm[m].aC:null),borderColor:C.act,pointRadius:3,borderWidth:3,tension:.35}]},options:{maintainAspectRatio:false,scales:{y:{ticks:{callback:fk},grid:{}},x:{grid:{display:false}}}}});
+  hbar('c4',pv.map(x=>x.k),pv.map(x=>x.v));
+  mk('c5',{type:'bar',data:{labels:pv.map(x=>x.k),datasets:[{label:'Volume (headcount)',data:pv.map(x=>x.vol),backgroundColor:C.act},{label:'Rate (cost per person)',data:pv.map(x=>x.prc),backgroundColor:C.amb}]},options:{indexAxis:'y',maintainAspectRatio:false,scales:{x:{stacked:true,ticks:{callback:fk},grid:{}},y:{stacked:true,grid:{display:false}}},plugins:{tooltip:{callbacks:{label:c=>c.dataset.label+': '+CUR+' '+f(c.raw)}}}}});
+  hbar('c6',qv.map(x=>x.k),qv.map(x=>x.v));
+
+  /* table */
+  const rows=tv.map(({k,a})=>{const b=sum(a,'bCost'),c=sum(a,'aCost');return{task:k,project:a[0].project,position:a[0].position,bh:sum(a,'bHC')/nM,ah:sum(a,'aHC')/nM,b,a:c,v:c-b,p:pc(c,b)}});
+  const H=[['task','Task'],['project','Project'],['position','Position'],['bh','Budget HC'],['ah','Actual HC'],['b','Budget cost'],['a','Actual cost'],['v','Variance'],['p','Var %'],['s','Status']];
+  $('thead').innerHTML=H.map(h=>`<th data-k="${h[0]}">${h[1]}${sortK===h[0]?(sortD>0?' ▲':' ▼'):''}</th>`).join('');
+  document.querySelectorAll('#thead th').forEach(th=>th.onclick=()=>{const k=th.dataset.k;if(k==='s')return;sortD=sortK===k?-sortD:-1;sortK=k;render()});
+  const s=$('q').value.toLowerCase();
+  const vis=rows.filter(r=>!s||(r.task+r.project+r.position).toLowerCase().includes(s)).sort((x,y)=>{const a=x[sortK],b=y[sortK];return (typeof a==='string'?a.localeCompare(b):a-b)*sortD*(typeof a==='string'?-1:1)});
+  const st=p=>p>5?['Over','o']:p<-5?['Under','u']:['On track','k'];
+  $('tb').innerHTML=vis.map(r=>{const z=st(r.p);return`<tr><td>${r.task}</td><td>${r.project}</td><td>${r.position}</td><td>${r.bh.toFixed(1)}</td><td>${r.ah.toFixed(1)}</td><td>${f(r.b)}</td><td>${f(r.a)}</td><td class="${r.v>0?'up':'dn'}">${r.v>0?'+':''}${f(r.v)}</td><td>${r.p.toFixed(1)}%<i class="vb" style="width:${Math.min(60,Math.abs(r.p)*1.5)}px;background:${r.p>0?C.red:C.grn}"></i></td><td><span class="pill ${z[1]}">${z[0]}</span></td></tr>`}).join('')||'<tr><td colspan="10">No tasks match. Clear the search or change the filters.</td></tr>';
+  const tb=sum(vis,'b'),ta=sum(vis,'a');
+  $('tf').innerHTML=`<tr><td colspan="3">Total (${vis.length} tasks)</td><td>${sum(vis,'bh').toFixed(1)}</td><td>${sum(vis,'ah').toFixed(1)}</td><td>${f(tb)}</td><td>${f(ta)}</td><td class="${ta>tb?'up':'dn'}">${ta>tb?'+':''}${f(ta-tb)}</td><td>${pc(ta,tb).toFixed(1)}%</td><td></td></tr>`;
+  window._vis=vis;
+}
+$('csv').onclick=()=>{
+  const h='Task,Project,Position,BudgetHC,ActualHC,BudgetCost,ActualCost,Variance,VarPct\n';
+  const b=(window._vis||[]).map(r=>[r.task,'"'+r.project+'"',r.position,r.bh.toFixed(2),r.ah.toFixed(2),Math.round(r.b),Math.round(r.a),Math.round(r.v),r.p.toFixed(1)].join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([h+b],{type:'text/csv'}));a.download='task_report.csv';a.click();
+};
+function applyTheme(t){
+  document.documentElement.dataset.theme=t;try{localStorage.setItem('th',t)}catch(e){}
+  const d=t==='dark';Chart.defaults.color=d?'#a9bac6':'#4a5c6a';Chart.defaults.borderColor=d?'#2a3b48':'#e6ecf0';
+  C.act=d?'#4fb8c8':'#0f6b78';C.bud=d?'#6d8394':'#9fb3c1';C.red=d?'#e5604a':'#c8412b';C.grn=d?'#4cb97f':'#2e8b57';
+  $('theme').textContent=d?'Light mode':'Dark mode';if(DATA.length)render();
+}
+$('theme').onclick=()=>applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+let t0=null;try{t0=localStorage.getItem('th')}catch(e){}
+applyTheme(t0||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'));
+setData(sample(),'Sample data');
+</script>
+</body>
+</html>
