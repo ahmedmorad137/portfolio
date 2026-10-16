@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahmed Mohsen Morad | Portfolio: Project Controls, Cost Control & Planning</title>
+<meta name="description" content="Portfolio of Ahmed Mohsen Morad, Senior Project Controls Engineer (PMP, PMI-SP). Live demos of cost, revenue and subcontractor reporting tools built on ERP data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#edf1f5;--sf:#fff;--ink:#0f1b2d;--mu:#56657a;--ln:#d3dbe6;--ac:#2447f5;--on:#fff;--fl:#d97706;--ok:#0f8a5f;--r:14px;--fd:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--fb:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0b1320;--sf:#121d2f;--ink:#e8eef7;--mu:#93a3bb;--ln:#24324a;--ac:#7c9bff;--on:#0b1320;--fl:#ffb547;--ok:#4ad3a0;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0b1320;--sf:#121d2f;--ink:#e8eef7;--mu:#93a3bb;--ln:#24324a;--ac:#7c9bff;--on:#0b1320;--fl:#ffb547;--ok:#4ad3a0;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--fb);padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+h1,h2,h3{font-family:var(--fd);line-height:1.08;margin:0;letter-spacing:-.02em}
+h1{font-size:clamp(2.3rem,6vw,4.6rem);font-weight:800}h2{font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:700}h3{font-size:1.2rem;font-weight:700}
+a{color:inherit}p{margin:.6em 0 0;max-width:68ch}
+:focus-visible{outline:3px solid var(--ac);outline-offset:3px;border-radius:6px}
+.w{max-width:1120px;margin:0 auto;padding:0 20px}section{padding:84px 0 0}
+.lead{color:var(--mu);font-size:1.08rem}
+header{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--ln);padding-top:env(safe-area-inset-top,0)}
+.bar{display:flex;align-items:center;gap:18px;height:60px}
+.logo{font:800 1.05rem var(--fd);text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:30px;height:30px;border-radius:9px;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:800 .8rem var(--fd);font-style:normal}
+nav{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}nav a{padding:6px 10px;border-radius:8px;text-decoration:none;font-size:.9rem;color:var(--mu);white-space:nowrap}nav a:hover{color:var(--ink);background:var(--sf)}
+.btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ln);background:var(--sf);color:var(--ink);padding:10px 16px;border-radius:999px;font:600 .92rem var(--fb);text-decoration:none;cursor:pointer}
+.btn.p{background:var(--ac);color:var(--on);border-color:var(--ac)}.btn:hover{transform:translateY(-1px)}
+#th{width:40px;height:40px;padding:0;justify-content:center;flex:none}
+.ct{display:flex;gap:6px}.ct a{width:40px;height:40px;border-radius:50%;border:1px solid var(--ln);background:var(--sf);display:grid;place-items:center;flex:none}.ct a:hover{border-color:var(--ac);color:var(--ac)}.ct svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hero{padding-top:56px}
+.hero .grid{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center}
+.hero p.lead{margin-top:20px}.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chart{background:var(--sf);border:1px solid var(--ln);border-radius:20px;padding:16px}
+.chart svg{width:100%;height:auto;display:block;touch-action:none;cursor:crosshair}
+.ro{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.88rem;color:var(--mu);margin-top:8px;min-height:3.2em}.ro b{color:var(--ink);font-weight:600}
+.leg{display:flex;gap:14px;flex-wrap:wrap;font-size:.82rem;color:var(--mu)}.leg i{display:inline-block;width:18px;height:3px;border-radius:2px;vertical-align:middle;margin-right:6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:1px;background:var(--ln);border:1px solid var(--ln);border-radius:var(--r);overflow:hidden;margin-top:56px}
+.stats div{background:var(--sf);padding:20px}.stats b{display:block;font:800 2rem/1 var(--fd);letter-spacing:-.03em}.stats span{color:var(--mu);font-size:.9rem}
+.demo{margin-top:28px;display:grid;grid-template-columns:300px 1fr;gap:20px}
+.tabs{display:flex;flex-direction:column;gap:8px}
+.tab{text-align:left;background:var(--sf);border:1px solid var(--ln);border-radius:var(--r);padding:14px 16px;cursor:pointer;color:var(--ink);font:inherit}
+.tab b{display:block;font:700 1rem var(--fd)}.tab span{font-size:.85rem;color:var(--mu)}
+.tab[aria-selected=true]{border-color:var(--ac);box-shadow:inset 4px 0 0 var(--ac)}
+.stage{background:var(--sf);border:1px solid var(--ln);border-radius:var(--r);overflow:hidden;min-width:0}
+.top{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--ln);font-size:.8rem;color:var(--mu)}
+.top i{width:10px;height:10px;border-radius:50%;background:var(--ln)}.top a{margin-left:auto;color:var(--ac);font-weight:600}
+.fr{height:min(620px,72vh);background:#fff;position:relative}.fr iframe{width:100%;height:100%;border:0}
+.fr .ph{position:absolute;inset:0;display:grid;place-items:center;color:#56657a;background:#f4f6f9;text-align:center;padding:20px}
+.info{padding:18px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;border-top:1px solid var(--ln)}
+.info h4{margin:0 0 4px;font:700 .95rem var(--fd)}.info p{margin:0;font-size:.92rem;color:var(--mu)}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:28px;counter-reset:s}
+.flow div{background:var(--sf);border:1px solid var(--ln);border-radius:var(--r);padding:18px;position:relative;counter-increment:s}
+.flow div:before{content:counter(s);font:800 .85rem var(--fd);width:26px;height:26px;border-radius:50%;background:var(--ac);color:var(--on);display:grid;place-items:center;margin-bottom:10px}
+.flow p{font-size:.9rem;color:var(--mu);margin:.3em 0 0}.flow .fx{border-color:var(--fl)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:var(--r);padding:22px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.chips span{border:1px solid var(--ln);border-radius:999px;padding:4px 12px;font-size:.86rem;background:var(--bg)}
+.card ul{margin:12px 0 0;padding-left:18px;color:var(--mu);font-size:.95rem}.card li{margin:5px 0}
+.evm{display:grid;grid-template-columns:1fr 1.2fr;gap:22px}
+.in{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{font-size:.82rem;color:var(--mu);display:block}
+input{width:100%;margin-top:3px;padding:9px 11px;border:1px solid var(--ln);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+.out{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.out div{background:var(--bg);border-radius:10px;padding:12px}.out b{display:block;font:800 1.35rem var(--fd)}.out span{font-size:.78rem;color:var(--mu)}
+.good{color:var(--ok)}.bad{color:var(--fl)}.vd{margin-top:12px;font-weight:600}
+.tl{margin-top:28px;border-left:2px solid var(--ln);padding-left:22px;display:grid;gap:22px}
+.tl div{position:relative}.tl div:before{content:"";position:absolute;left:-29px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--ac);border:3px solid var(--bg)}
+.tl small{color:var(--mu)}.tl p{margin:.3em 0 0;font-size:.95rem}
+.cv{margin-top:84px;background:var(--ink);color:var(--bg);border-radius:24px;padding:40px;display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+.cv .btn{background:var(--bg);color:var(--ink);border-color:var(--bg)}.cv p{color:inherit;opacity:.78}
+footer{padding:40px 0 48px;color:var(--mu);font-size:.88rem}footer .r{display:flex;flex-wrap:wrap;gap:8px 22px;margin-bottom:10px}
+.fz{display:grid;grid-template-columns:1fr 1.25fr;gap:22px;margin-top:28px}.fz .in{grid-template-columns:1fr}.fz svg{width:100%;height:auto;margin-top:12px}.fct{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px}.fct div{background:var(--bg);border-radius:10px;padding:10px}.fct b{display:block;font:800 1.1rem var(--fd)}.fct span{font-size:.75rem;color:var(--mu)}small.n{display:block;color:var(--mu);margin-top:10px;font-size:.82rem}.pj{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-flow:dense;gap:16px;margin-top:22px}@media(max-width:900px){.pj{grid-template-columns:repeat(2,1fr)}}
+.pf{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:26px}.pf button{border:1px solid var(--ln);background:var(--sf);color:var(--ink);border-radius:999px;padding:7px 16px;font:600 .88rem var(--fb);cursor:pointer}.pf button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}.pf .cn{margin-left:auto;color:var(--mu);font-size:.85rem}
+.pc{background:var(--sf);border:1px solid var(--ln);border-top:5px solid var(--cc);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}.pc:hover{transform:translateY(-4px);box-shadow:0 14px 30px -18px var(--cc)}.pc[hidden]{display:none}
+.pc .pt{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:.85rem;color:var(--mu);font-weight:500}.pc .pt b{color:var(--cc);font-weight:600}
+.cr{background:var(--ac);color:var(--on);font:700 .7rem var(--fd);padding:3px 10px;border-radius:999px;letter-spacing:.06em;cursor:help}
+.pv{font:800 clamp(1.9rem,3.4vw,2.5rem)/1 var(--fd);letter-spacing:-.03em;margin:16px 0 10px}.pc h3{font-size:1.05rem;line-height:1.2}.pc p{margin:6px 0 14px;font-size:.9rem;color:var(--mu)}.pc small{margin-top:auto;color:var(--mu);font-size:.8rem;padding-top:12px;border-top:1px dashed var(--ln)}
+.pc.big{grid-column:span 2}.pc.big .pv{font-size:clamp(2.5rem,5.4vw,3.8rem)}.pc.big h3{font-size:1.3rem}
+.pc.cp{grid-column:1/-1;display:grid;grid-template-columns:1fr 1.15fr;gap:0 36px;background:linear-gradient(135deg,var(--sf),color-mix(in srgb,var(--ac) 9%,var(--sf)))}.pc.cp .pv{font-size:clamp(2.5rem,5.4vw,3.8rem)}.pc.cp h3{font-size:1.3rem}.pc.cp h4{margin:0 0 8px;font:700 .95rem var(--fd)}.pc.cp ul{margin:0;padding-left:18px;color:var(--mu);font-size:.92rem}.pc.cp li{margin:6px 0}.pc.cp small{grid-column:1/-1}
+@media(max-width:760px){.pc.cp{grid-template-columns:1fr}}
+@media(max-width:620px){.pj{grid-template-columns:1fr}.pc.big{grid-column:span 1}}.card svg{width:100%;height:auto;display:block;margin-top:12px}.lg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--mu);margin-top:8px}.lg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:6px;vertical-align:-1px}.tb{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:10px}.tb td{padding:7px 0;border-bottom:1px solid var(--ln)}.tb td:last-child{text-align:right;font-weight:600}.tb td:nth-child(2){color:var(--mu);padding:0 10px;font-size:.82rem}
+@media(max-width:860px){.fz{grid-template-columns:1fr}.hero .grid,.demo,.two,.evm{grid-template-columns:1fr}.tabs{flex-direction:row;overflow-x:auto}.tab{min-width:210px}nav{display:none}.bar{justify-content:space-between;gap:8px}.ct{margin-left:auto}.cv{padding:28px}}
+@media(max-width:520px){.logo span{display:none}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="w bar">
+<a class="logo" href="#top"><i>AM</i><span>Ahmed Mohsen Morad</span></a>
+<nav aria-label="Sections"><a href="#tools">Live demos</a><a href="#projects">Projects</a><a href="#planning">Planning</a><a href="#feas">Feasibility</a><a href="#evm">EVM tool</a><a href="#career">Career</a><a href="#cv">CV</a></nav>
+<div class="ct"><a href="mailto:ahmedmorad1095@gmail.com" aria-label="Email ahmedmorad1095@gmail.com" title="Email ahmedmorad1095@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a><a href="tel:+966567890169" aria-label="Call +966 56 789 0169" title="Call +966 56 789 0169"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></a><a href="https://linkedin.com/in/ahmedmohsenmorad/" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 11v6M8 7.500v.01M12 17v-6m0 3a3 3 0 0 1 6 0v3"/></svg></a></div><button class="btn" id="th" aria-label="Switch light or dark theme" title="Theme">◐</button>
+</div></header>
+
+<main id="top">
+<section class="hero"><div class="w grid">
+<div>
+<h1>I make project cost and schedule visible while there is still time to act.</h1>
+<p class="lead">Senior Project Controls Engineer with 8+ years in cost control, budgeting, planning and scheduling across Saudi Arabia and Egypt. I build ERP-connected reporting tools that replace manual workbooks. Portfolios up to SAR 900M+ and EGP 2B+.</p>
+<p style="font-size:.95rem;color:var(--mu)">This website is my personal portfolio. I designed and built it, together with the tools and calculators on it.</p>
+<div class="cta"><a class="btn p" href="#tools">Open the live demos</a><a class="btn" href="Ahmed_Morad_CV.pdf" download>Download CV (PDF)</a></div>
+</div>
+<div class="chart" aria-label="Interactive S-curve: planned, actual and forecast cumulative progress">
+<svg id="sc" viewBox="0 0 600 320" role="img" aria-label="S-curve chart. Move the pointer to read planned, actual and forecast values."></svg>
+<div class="leg"><span><i style="background:var(--mu)"></i>Planned</span><span><i style="background:var(--ac)"></i>Actual</span><span><i style="background:var(--fl)"></i>Forecast</span></div>
+<div class="ro" id="ro" aria-live="polite">Move across the chart to read the variance at any month.</div>
+</div>
+</div>
+<div class="w"><div class="stats">
+<div><b>70+</b><span>Subcontractor workbooks consolidated into one Power BI model</span></div>
+<div><b>71</b><span>Projects ranked in one ERP-connected revenue dashboard</span></div>
+<div><b>8</b><span>Area managers aligned to one reporting standard</span></div>
+<div><b>EGP 2B+</b><span>Largest project controlled (Mostaqbal Masr pipelines)</span></div>
+</div></div>
+</section>
+
+<section id="tools"><div class="w">
+<h2>Tools I built, running live</h2>
+<p class="lead">All six tools open with fictional sample data, so you can explore a full report. They are built to process Excel files locally in the browser, so nothing is uploaded anywhere. Company details are removed.</p>
+<div class="demo">
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="stage"><div class="top"><i></i><i></i><i></i><span id="fn"></span><a id="fs" href="#" target="_blank" rel="noopener">Open full screen</a></div>
+<div class="fr" id="fr"></div>
+<div class="info" id="inf"></div></div>
+</div>
+</div></section>
+
+<section id="projects"><div class="w">
+<h2>Some of the projects I worked on</h2>
+<p class="lead">Power transmission, substations, solar, pipelines, micro tunneling and utilities across Saudi Arabia and Egypt, and the CRPO ordering framework I control costs under.</p>
+<div class="pf" id="pf" role="group" aria-label="Filter projects"></div>
+<div class="pj" id="pj"></div>
+</div></section>
+
+<section id="planning"><div class="w">
+<h2>Planning and scheduling, not only cost</h2>
+<div class="two">
+<div class="card"><h3>Schedule as the cost driver</h3><p>I started as a site planning engineer, building schedules and trend reports for a bank committee. Today I tie progress to cost, so a slipping activity shows up as a cash flow and forecast change.</p>
+<div class="chips"><span>Primavera P6</span><span>MS Project</span><span>WBS</span><span>Baseline and updates</span><span>Schedule analysis</span><span>Earned Value</span><span>PMI-SP certified</span></div></div>
+<div class="card"><h3>Where it shows up</h3><ul><li>Remaining Works tracker: weekly updates tied to the schedule, published as a permanent link.</li><li>Planned vs achieved quantities by month in the Revenue and IPC tool.</li><li>Cash flow projections and cost-to-complete in monthly reports.</li><li>EVM on 20+ projects to flag deviations early.</li></ul></div>
+</div>
+</div></section>
+
+<section id="feas"><div class="w">
+<h2>Feasibility study: buying vs renting a micro tunneling machine</h2>
+<p class="lead">In the E&amp;C sector at Elsewedy Electric, I prepared the feasibility study behind the decision to create a micro tunneling department: rent versus buy for a Herrenknecht AVN2500AB. This is the same method shown with dummy figures: a 5-year service life, 10% interest, and engineering economics factors (P/F, F/P, A/P, A/F) to put every cost on one time basis.</p>
+<div class="chips"><span>E&amp;C sector</span><span>Micro tunneling, Elsewedy Electric</span><span>P/F and F/P</span><span>A/P and A/F</span><span>NPV, IRR, payback</span><span>Idle vs operating cost</span><span>Incoterms</span></div>
+<div class="stats" id="fk"></div>
+<div class="two"><div class="card"><h3>Buying pays back inside the service life</h3><p class="lead" style="font-size:.92rem">Cumulative discounted cash position of buying instead of renting.</p><svg id="g1" viewBox="0 0 520 270" role="img" aria-label="Cumulative discounted cash flow of buying versus renting, crossing zero before year 5"></svg></div>
+<div class="card"><h3>Annual cost: own vs rent</h3><p class="lead" style="font-size:.92rem">Same operating cost in both cases. Capital recovery and idle cost against rent.</p><svg id="g2" viewBox="0 0 520 270" role="img" aria-label="Stacked annual cost for buying and for renting"></svg><div class="lg" id="l2"></div></div></div>
+<div class="two"><div class="card"><h3>Idle and operating cost by utilization</h3><p class="lead" style="font-size:.92rem">Annual cost as working months per year change. Owning wins above the break-even.</p><svg id="g3" viewBox="0 0 520 270" role="img" aria-label="Annual cost of buying and renting by working months per year with break-even"></svg></div>
+<div class="card"><h3>Assumptions and factors</h3><table class="tb" id="tb"></table></div></div>
+<div class="card" style="margin-top:20px"><h3>Analysis</h3><ul id="fa"></ul></div>
+<small class="n">All figures are dummy numbers for illustration. The method matches the real study.</small>
+</div></section>
+
+<section id="evm"><div class="w">
+<h2>Try it: EVM health check</h2>
+<p class="lead">A small tool I use to read project health in seconds. Change the numbers.</p>
+<div class="card evm" style="margin-top:28px">
+<div class="in" id="in"></div>
+<div><div class="out" id="out"></div><div class="vd" id="vd"></div></div>
+</div>
+</div></section>
+
+<section id="career"><div class="w">
+<h2>Career</h2>
+<div class="tl">
+<div><small>Dec 2025 – now</small><h3>Senior Project Controls Engineer, SAJCO</h3><p>Portfolio cost control for Riyadh. Power BI and ERP dashboards for subcontractor cost, billing and revenue. Acts as Assistant Project Controls Director.</p></div>
+<div><small>Dec 2024 – Nov 2025</small><h3>Senior Budgeting and Cost Control Engineer, Nesma Infrastructure and Technology</h3><p>Company-wide manpower dashboard and ERP-linked reports for a power transmission portfolio. Projects from SAR 89M to SAR 900M.</p></div>
+<div><small>Jan 2022 – Nov 2024</small><h3>Senior Cost Control Engineer, Elsewedy Electric</h3><p>Controlled EGP 1B–2B+ projects end to end. Built the first automated consolidated ERP cost report. Champion of the Year 2022–2023.</p></div>
+<div><small>Sep 2019 – Jan 2022</small><h3>Planning and Cost Control Engineer, Tabarak</h3><p>Unified cost reports for the Board Chairman with no ERP in place. EVM across 20+ projects.</p></div>
+<div><small>Apr 2018 – Aug 2019</small><h3>Site Planning Engineer, CPAS</h3><p>Schedule and progress reporting for the USD 2M AFREXIMBANK HQ project.</p></div>
+</div>
+<div class="chips"><span>PMP</span><span>PMI-SP</span><span>CCP in progress (2027)</span><span>Primavera P6 (Oracle)</span><span>Saudi Council of Engineers</span><span>Power BI and DAX</span><span>VBA and Advanced Excel</span><span>FIDIC and claims</span></div>
+</div></section>
+
+<section id="cv"><div class="w"><div class="cv" style="margin-top:0">
+<div><h2>Take the full CV with you</h2></div>
+<a class="btn" href="Ahmed_Morad_CV.pdf" download>Download CV (PDF)</a>
+</div></div></section>
+</main>
+
+<footer><div class="w">Portfolio of Ahmed Mohsen Morad, designed and built by me. Riyadh, KSA. Tools shown are company-neutral.</div></footer>
+
+<script>
+const $=s=>document.querySelector(s);
+/* theme */
+const root=document.documentElement;
+try{const t=localStorage.getItem("th");if(t)root.dataset.theme=t}catch(e){}
+$("#th").onclick=()=>{const d=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches;const n=d?"light":"dark";root.dataset.theme=n;try{localStorage.setItem("th",n)}catch(e){}};
+/* S-curve */
+const W=600,H=320,P={l:36,r:14,t:14,b:30},N=24,ST=15;
+const pl=t=>{const f=x=>1/(1+Math.exp(-9*(x-.5)));return(f(t)-f(0))/(f(1)-f(0))};
+const ac=t=>pl(t)*(1-.1*Math.min(1,t/.62));
+const fc=t=>Math.min(1.04,ac(ST/N)+(t-ST/N)*(1.04-ac(ST/N))/(1-ST/N)*1.05);
+const X=i=>P.l+i/N*(W-P.l-P.r),Y=v=>H-P.b-v*(H-P.t-P.b);
+const path=(f,a,b)=>{let d="";for(let i=a;i<=b;i++)d+=(i==a?"M":"L")+X(i).toFixed(1)+" "+Y(f(i/N)).toFixed(1);return d};
+let g='';for(let v=0;v<=1;v+=.25)g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)"/><text x="${P.l-6}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="var(--mu)">${v*100}%</text>`;
+g+=`<text x="${P.l}" y="${H-8}" font-size="11" fill="var(--mu)">Month 0</text><text x="${W-P.r}" y="${H-8}" text-anchor="end" font-size="11" fill="var(--mu)">Month ${N}</text>`;
+g+=`<line x1="${X(ST)}" x2="${X(ST)}" y1="${P.t}" y2="${H-P.b}" stroke="var(--mu)" stroke-dasharray="3 4"/><text x="${X(ST)-6}" y="${P.t+10}" text-anchor="end" font-size="11" fill="var(--mu)">Status date</text>`;
+g+=`<path d="${path(pl,0,N)}" fill="none" stroke="var(--mu)" stroke-width="2.5"/>`;
+g+=`<path class="dr" d="${path(ac,0,ST)}" fill="none" stroke="var(--ac)" stroke-width="4" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"><animate attributeName="stroke-dashoffset" from="1" to="0" dur="1.6s" fill="freeze"/></path>`;
+g+=`<path d="${path(fc,ST,N)}" fill="none" stroke="var(--fl)" stroke-width="3" stroke-dasharray="6 6"/>`;
+g+=`<line id="cl" y1="${P.t}" y2="${H-P.b}" stroke="var(--ink)" opacity="0"/><circle id="cp" r="5" fill="var(--ink)" opacity="0"/>`;
+const sv=$("#sc");sv.innerHTML=g;
+const ro=$("#ro"),cl=$("#cl"),cp=$("#cp");
+function mv(e){const r=sv.getBoundingClientRect();let m=Math.round(((e.clientX-r.left)/r.width*W-P.l)/(W-P.l-P.r)*N);m=Math.max(0,Math.min(N,m));
+const p=pl(m/N)*100,past=m<=ST,a=(past?ac(m/N):fc(m/N))*100,v=a-p;
+cl.setAttribute("x1",X(m));cl.setAttribute("x2",X(m));cl.setAttribute("opacity",.35);cp.setAttribute("cx",X(m));cp.setAttribute("cy",Y(a/100));cp.setAttribute("opacity",1);
+ro.innerHTML=`<span>Month <b>${m}</b></span><span>Planned <b>${p.toFixed(1)}%</b></span><span>${past?"Actual":"Forecast"} <b>${a.toFixed(1)}%</b></span><span>Variance <b class="${v<-.05?"bad":"good"}">${v>0?"+":""}${v.toFixed(1)} pts</b></span>`}
+sv.addEventListener("pointermove",mv);sv.addEventListener("pointerdown",mv);
+/* demos */
+const T=[
+{n:"Revenue and IPC Tracker",s:"Raw project data to a live revenue report",f:"revenue-reports.html",
+ a:"Project revenue, BOQ progress and IPC status lived in separate files and took days to compile each month.",
+ b:"Upload the contract summary, planned and achieved quantities and site input. It builds one report per project, with mobile and desktop views, and a link list for publishing.",
+ c:"Cut monthly revenue and IPC reporting time. Updates go to a permanent link every week or month. Files are processed in the browser only."},
+{n:"Subcontractor Performance",s:"Invoicing vs revenue, over-invoicing alerts",f:"sc-performance.html",
+ a:"Subcontractor invoicing was hard to compare with the revenue earned from the same work.",
+ b:"Tracks contract value, invoiced amount, balance, revenue efficiency and top 10 subcontractors, with monthly movement and data checks. English and Arabic.",
+ c:"Flags subcontractors invoiced above revenue, so cost-control action starts before the next payment cycle."},
+{n:"Remaining Works Update",s:"Weekly progress tied to the schedule",f:"remaining-works.html",
+ a:"Management asked every week what work was left on the building, and the answer needed manual rework.",
+ b:"Takes the weekly update files and the schedule, then generates one remaining-works report and a data file for hosting. Arabic interface.",
+ c:"One consistent weekly view of what is left. Planning and cost data come from the same source."},
+{n:"Manpower Dashboard",s:"Budget vs actual headcount and cost",f:"manpower-dashboard.html",
+ a:"Labor cost overruns showed up late, because headcount and cost lived in separate sheets by task number.",
+ b:"Compares budget with actual headcount and cost by task number, project and position, with monthly and cumulative curves and plain-language insights. Reads an Excel upload.",
+ c:"Flags position-level overages and budget-vs-actual variances early, so labor cost is corrected during the project."},
+{n:"Depreciation Studio",s:"Equipment depreciation, three methods",f:"depreciation-studio.html",
+ a:"When building the full budget of equipment values, the team could not calculate depreciation consistently across many projects, or for a new machine purchase, and management needed a clear way to see it.",
+ b:"A ready tool. Enter each machine's purchase value, life, residual and method (straight line, arithmetic degressive or declining balance) with the tax system. It shows the yearly schedule, fleet totals by currency and a side-by-side method comparison, in a format built for top management.",
+ c:"One consistent method across projects and purchases. Equipment cost in the budget is calculated the same way for everyone, purchase options are compared before the decision, and management reads a chart instead of a workbook."},
+{n:"Delay Claim Builder",s:"EOT claim summary from a delay log",f:"delay-claim-builder.html",
+ a:"Delay claims started from scattered records, and the effect of each delay on the completion date was hard to show. Teams needed a simple way to analyze delays by time window and to see what each window means for the project.",
+ b:"Log each delay event with dates, responsibility and supporting documents. The tool lays events on a timeline by window, shows each window's effect on the completion date, and builds the claim summary: revised date, overhead, labor and equipment cost, total claim and a responsibility check.",
+ c:"Projects see how much each delay moves the finish date and what it costs. Planning, cost control and contracts teams work from one log and one report format, so a claim is ready faster and is easier to defend. Anyone who used it could explain a delay without rebuilding the analysis."}];
+const tb=$("#tabs"),fr=$("#fr"),inf=$("#inf");
+T.forEach((t,i)=>{const b=document.createElement("button");b.className="tab";b.role="tab";b.innerHTML=`<b>${t.n}</b><span>${t.s}</span>`;b.onclick=()=>sel(i);tb.appendChild(b)});
+function sel(i){const t=T[i];[...tb.children].forEach((b,k)=>b.setAttribute("aria-selected",k===i));
+$("#fn").textContent=t.f;$("#fs").href=t.f;
+fr.innerHTML=`<div class="ph">Loading ${t.n}…<br>If it stays blank, open the file from a web server, not from a folder.</div><iframe title="${t.n} demo" loading="lazy" src="${t.f}"></iframe>`;
+fr.querySelector("iframe").onload=e=>{const p=fr.querySelector(".ph");if(p)p.remove()};
+inf.innerHTML=`<div><h4>The problem</h4><p>${t.a}</p></div><div><h4>What it does</h4><p>${t.b}</p></div><div><h4>Impact</h4><p>${t.c}</p></div>`}
+sel(0);
+
+/* Projects */
+const PJ=[
+["Rumah BSP-9077 A & B","SAR 900M","Nesma","Bulk supply point","Saudi Arabia","2024 – 2025",0,1,"var(--ac)"],
+["Bisha 380kV PV Power Plant","SAR 645M","Nesma","Solar PV power plant","Saudi Arabia","2024 – 2025",0,0,"var(--ac)"],
+["Refurbishment of 132kV Qunfudah CPS Substation","SAR 235M","Nesma","Substation refurbishment","Saudi Arabia","2024 – 2025",0,0,"var(--ac)"],
+["Abu Hadriyah Substation with OHTL Rerouting","SAR 169M","Nesma","Substation and overhead line","Saudi Arabia","2024 – 2025",0,0,"var(--ac)"],
+["Nawaryah Substation and Makkah North BSP","SAR 89M","Nesma","Substation and bulk supply point","Saudi Arabia","2024 – 2025",0,0,"var(--ac)"],
+["Contract Release Purchase Order","CRPO","Ordering framework","Project orders under a Long-Term Agreement with pre-qualified offshore contractors. I check each against the budget and track it as a commitment.","","Under a Long-Term Agreement",0,0,"var(--ink)"],
+["Mostaqbal Masr Transmission Pipelines","EGP 2.0B","Elsewedy Electric","Transmission pipelines","Egypt","2022 – 2024",0,1,"var(--fl)"],
+["EDCO Box Culvert & Micro Tunneling Crossings","EGP 1.45B","Elsewedy Electric","Box culvert and micro tunneling","Egypt","2022 – 2024",0,0,"var(--fl)"],
+["USAID Dronka Wastewater System","USD 8.8M","Tabarak","Wastewater system","Egypt","2019 – 2022",0,0,"var(--ok)"],
+["New Giza Infrastructure Networks in NH07","EGP 100.64M","Tabarak","Irrigation, water and wastewater networks","Egypt","2019 – 2022",0,0,"var(--ok)"]];
+$("#pj").innerHTML=PJ.map(p=>`<article class="pc${p[7]?" big":""}" data-c="${p[6]}" data-k="${p[4]}" style="--cc:${p[8]}"><div class="pt"><b>${p[2]}</b>${p[6]?'<span class="cr" title="Contract Release Purchase Order, issued under a Long-Term Agreement">CRPO</span>':""}</div><div class="pv">${p[1]}</div><h3>${p[0]}</h3><p>${p[3]}</p><small>${p[4]?p[4]+" · ":""}${p[5]}</small></article>`).join("");
+const FL=[["All",()=>1],["Saudi Arabia",c=>c.dataset.k=="Saudi Arabia"],["Egypt",c=>c.dataset.k=="Egypt"]];
+function flt(i){const cs=[...document.querySelectorAll(".pc")];let k=0;cs.forEach(c=>{const v=FL[i][1](c);c.hidden=!v;k+=v?1:0});[...$("#pf").querySelectorAll("button")].forEach((b,j)=>b.setAttribute("aria-pressed",j===i));$("#pn").textContent=k+" of "+PJ.length+" projects"}
+$("#pf").innerHTML=FL.map((f,i)=>`<button type="button">${f[0]}</button>`).join("")+'<span class="cn" id="pn"></span>';
+[...$("#pf").querySelectorAll("button")].forEach((b,i)=>b.onclick=()=>flt(i));flt(0);
+/* Feasibility case study */
+function fm(n){return isFinite(n)?Math.round(n).toLocaleString("en-US"):"–"}
+(function(){
+const P=3500000,sv=.25,n=5,i=.10,m=9,idleR=25000,op=40000,rent=125000;
+const S=P*sv,q=Math.pow(1+i,n),AP=i*q/(q-1),AF=i/(q-1),PA=(q-1)/(i*q),PF=1/q,FP=q;
+const CR=P*AP-S*AF,idle=idleR*(12-m),opx=op*m,buy=CR+idle+opx,rnt=rent*m+opx,adv=rnt-buy,sav=rent*m-idle;
+const cum=[-P];for(let t=1;t<=n;t++)cum.push(cum[t-1]+sav/Math.pow(1+i,t));
+let pb=NaN;for(let t=1;t<=n;t++)if(cum[t]>=0){pb=t-1+(-cum[t-1])/(cum[t]-cum[t-1]);break}
+const fin=cum[n]+S*PF,sp=P/sav,BE=(CR+12*idleR)/(rent+idleR);
+const f=r=>-P+[1,2,3,4,5].reduce((a,t)=>a+sav/Math.pow(1+r,t),0)+S/Math.pow(1+r,n);
+let lo=0,hi=1;for(let k=0;k<60;k++){const mid=(lo+hi)/2;f(mid)>0?lo=mid:hi=mid}const irr=lo;
+$("#fk").innerHTML=[[fm(fin/1000)+"K","NPV of buying instead of renting"],[pb.toFixed(1)+" yrs","Discounted payback (life: 5 yrs)"],[(irr*100).toFixed(0)+"%","IRR on the purchase, vs 10% interest"],[BE.toFixed(1)+" mo","Break-even working months per year"]].map(a=>`<div><b>${a[0]}</b><span>${a[1]}</span></div>`).join("");
+const K=v=>(v/1000).toFixed(0)+"K",M=v=>(v/1e6).toFixed(1)+"M";
+const axis=(x,y,w,h)=>`<line x1="${x}" x2="${x+w}" y1="${y+h}" y2="${y+h}" stroke="var(--ln)"/>`;
+/* g1 */
+{const L=52,R=14,T=16,B=34,W=520,H=270,lo=-P*1.08,hi=fin*1.2,X=t=>L+t/n*(W-L-R),Y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+let g=[-3e6,-2e6,-1e6,0,1e6].map(v=>`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="${v?"var(--ln)":"var(--mu)"}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="var(--mu)">${M(v)}</text>`).join("");
+for(let t=0;t<=n;t++)g+=`<text x="${X(t)}" y="${H-12}" text-anchor="middle" font-size="11" fill="var(--mu)">Yr ${t}</text>`;
+g+=`<path d="${cum.map((v,t)=>(t?"L":"M")+X(t)+" "+Y(v)).join("")}" fill="none" stroke="var(--ac)" stroke-width="3.5" stroke-linejoin="round"/>`;
+g+=`<path d="M${X(n)} ${Y(cum[n])}L${X(n)} ${Y(fin)}" stroke="var(--ok)" stroke-width="3.5" stroke-dasharray="4 4"/><circle cx="${X(n)}" cy="${Y(fin)}" r="5" fill="var(--ok)"/><text x="${X(n)-8}" y="${Y(fin)-8}" text-anchor="end" font-size="11" fill="var(--ink)">+ salvage (P/F): ${M(fin)}</text>`;
+cum.forEach((v,t)=>g+=`<circle cx="${X(t)}" cy="${Y(v)}" r="4" fill="var(--ac)"/>`);
+g+=`<circle cx="${X(pb)}" cy="${Y(0)}" r="7" fill="var(--sf)" stroke="var(--fl)" stroke-width="3"/><text x="${X(pb)-10}" y="${Y(0)-12}" text-anchor="end" font-size="12" font-weight="600" fill="var(--ink)">Payback ${pb.toFixed(1)} yrs</text>`;
+$("#g1").innerHTML=g}
+/* g2 */
+{const L=48,T=24,B=36,W=520,H=270,mx=Math.max(buy,rnt)*1.12,Y=v=>T+(1-v/mx)*(H-T-B),bw=120,xs=[110,300];
+const col={cr:"var(--ac)",id:"var(--fl)",op:"var(--mu)",rt:"var(--ink)"};
+const stack=(x,parts)=>{let acc=0,o="";parts.forEach(a=>{const y1=Y(acc+a[1]),y0=Y(acc);o+=`<rect x="${x}" y="${y1}" width="${bw}" height="${y0-y1}" fill="${col[a[0]]}" ${a[0]=="rt"?'opacity=".8"':""} rx="2"/><text x="${x+bw/2}" y="${(y0+y1)/2+4}" text-anchor="middle" font-size="12" font-weight="600" fill="var(--sf)">${K(a[1])}</text>`;acc+=a[1]});return o+`<text x="${x+bw/2}" y="${Y(acc)-8}" text-anchor="middle" font-size="13" font-weight="700" fill="var(--ink)">${K(acc)}</text>`};
+let g=axis(L,0,W-L-14,H-B)+stack(xs[0],[["cr",CR],["id",idle],["op",opx]])+stack(xs[1],[["rt",rent*m],["op",opx]]);
+g+=`<text x="${xs[0]+bw/2}" y="${H-12}" text-anchor="middle" font-size="12" fill="var(--mu)">Own (buy)</text><text x="${xs[1]+bw/2}" y="${H-12}" text-anchor="middle" font-size="12" fill="var(--mu)">Rent</text>`;
+$("#g2").innerHTML=g;$("#l2").innerHTML=`<span><i style="background:${col.cr}"></i>Capital recovery (A/P, A/F)</span><span><i style="background:${col.id}"></i>Idle cost</span><span><i style="background:${col.op}"></i>Operating cost</span><span><i style="background:${col.rt};opacity:.8"></i>Rent</span>`}
+/* g3 */
+{const L=52,R=14,T=16,B=34,W=520,H=270,b=x=>CR+idleR*(12-x)+op*x,r=x=>(rent+op)*x,mx=Math.max(b(12),r(12))*1.08,X=x=>L+x/12*(W-L-R),Y=v=>T+(1-v/mx)*(H-T-B);
+let g=[0,.25,.5,.75,1].map(k=>`<line x1="${L}" x2="${W-R}" y1="${Y(mx/1.08*k)}" y2="${Y(mx/1.08*k)}" stroke="var(--ln)"/><text x="${L-6}" y="${Y(mx/1.08*k)+4}" text-anchor="end" font-size="11" fill="var(--mu)">${M(mx/1.08*k)}</text>`).join("");
+[0,3,6,9,12].forEach(x=>g+=`<text x="${X(x)}" y="${H-12}" text-anchor="middle" font-size="11" fill="var(--mu)">${x}</text>`);
+g+=`<text x="${W-R}" y="${H-1}" text-anchor="end" font-size="10" fill="var(--mu)">working months per year</text>`;
+g+=`<path d="M${X(0)} ${Y(b(0))}L${X(12)} ${Y(b(12))}" stroke="var(--ac)" stroke-width="3.5" fill="none"/><path d="M${X(0)} ${Y(0)}L${X(12)} ${Y(r(12))}" stroke="var(--fl)" stroke-width="3.5" fill="none"/>`;
+g+=`<text x="${X(12)-4}" y="${Y(b(12))+16}" text-anchor="end" font-size="11" fill="var(--ac)">Own</text><text x="${X(12)-4}" y="${Y(r(12))-8}" text-anchor="end" font-size="11" fill="var(--fl)">Rent</text>`;
+g+=`<line x1="${X(m)}" x2="${X(m)}" y1="${T}" y2="${H-B}" stroke="var(--mu)" stroke-dasharray="3 4"/><text x="${X(m)+5}" y="${T+10}" font-size="11" fill="var(--mu)">Plan: ${m} mo</text>`;
+g+=`<circle cx="${X(BE)}" cy="${Y(b(BE))}" r="6" fill="var(--ink)"/><text x="${X(BE)-8}" y="${Y(b(BE))-12}" text-anchor="end" font-size="12" font-weight="600" fill="var(--ink)">Break-even ${BE.toFixed(1)}</text>`;
+$("#g3").innerHTML=g}
+$("#tb").innerHTML=[["Purchase price (P)","",fm(P)],["Salvage value at year 5","25% of P",fm(S)],["Service life, interest","",n+" yrs, "+(i*100)+"%"],["Rent per working month","",fm(rent)],["Operating cost per working month","both cases",fm(op)],["Idle cost per idle month","owned only",fm(idleR)],["P/F","1/(1+i)^n",PF.toFixed(4)],["F/P","(1+i)^n",FP.toFixed(4)],["A/P","capital recovery",AP.toFixed(4)],["A/F","salvage spread",AF.toFixed(4)],["P/A","annuity to today",PA.toFixed(4)]].map(a=>`<tr><td>${a[0]}</td><td>${a[1]}</td><td>${a[2]}</td></tr>`).join("");
+$("#fa").innerHTML=[
+`At ${m} working months a year, owning costs ${fm(buy)} a year and renting costs ${fm(rnt)}. Owning saves ${fm(adv)} a year, ${(adv/rnt*100).toFixed(0)}% of the rental bill.`,
+`The ${fm(P)} purchase is recovered by ${fm(sav)} a year of avoided rent net of idle cost. Discounted at ${(i*100)}% (P/F per year), payback takes ${pb.toFixed(1)} years, and ${sp.toFixed(1)} years without discounting. Both sit inside the 5-year service life.`,
+`NPV of buying instead of renting is ${fm(fin)} including the salvage value, worth ${fm(S*PF)} today (P/F = ${PF.toFixed(4)}). IRR is ${(irr*100).toFixed(0)}%, well above the ${(i*100)}% interest rate.`,
+`Idle cost is ${fm(idle)} a year, ${(idle/buy*100).toFixed(0)}% of owned cost. Operating cost is ${fm(opx)} either way, so utilization is what decides. Capital recovery is ${fm(CR)} a year whether the machine works or not.`,
+`Below ${BE.toFixed(1)} working months a year renting wins. The plan of ${m} months leaves a margin of ${(m-BE).toFixed(1)} months, so the decision holds unless the order book drops.`].map(t=>`<li>${t}</li>`).join("");
+})();
+/* EVM */
+const F=[["bac","Budget at completion (BAC)",10000000],["pv","Planned value (PV)",4000000],["ev","Earned value (EV)",3600000],["ac","Actual cost (AC)",3900000]];
+$("#in").innerHTML=F.map(f=>`<label>${f[1]}<input id="${f[0]}" type="number" min="0" value="${f[2]}"></label>`).join("");
+function fm(n){return isFinite(n)?Math.round(n).toLocaleString("en-US"):"–"}
+function calc(){const v=k=>+$("#"+k).value||0,bac=v("bac"),pv=v("pv"),ev=v("ev"),ac=v("ac");
+const cpi=ac?ev/ac:0,spi=pv?ev/pv:0,eac=cpi?bac/cpi:NaN,tc=bac-ac?(bac-ev)/(bac-ac):NaN;
+const k=x=>x>=1?"good":"bad";
+$("#out").innerHTML=`<div><b class="${k(cpi)}">${cpi.toFixed(2)}</b><span>CPI</span></div><div><b class="${k(spi)}">${spi.toFixed(2)}</b><span>SPI</span></div><div><b class="${k(tc<=1?1:0)}">${isFinite(tc)?tc.toFixed(2):"–"}</b><span>TCPI</span></div><div><b class="${ev-ac>=0?"good":"bad"}">${fm(ev-ac)}</b><span>Cost variance</span></div><div><b class="${ev-pv>=0?"good":"bad"}">${fm(ev-pv)}</b><span>Schedule variance</span></div><div><b class="${bac-eac>=0?"good":"bad"}">${fm(bac-eac)}</b><span>Variance at completion</span></div>`;
+$("#vd").textContent=!ac||!pv?"Enter PV and AC to see the reading.":cpi>=1&&spi>=1?"Ahead on cost and schedule.":cpi<1&&spi<1?`Over cost and behind schedule. At this pace the project ends near ${fm(eac)}.`:cpi<1?`Cost is the issue. At this pace the project ends near ${fm(eac)}.`:"Under budget but behind schedule. Check resources and sequencing."}
+$("#in").addEventListener("input",calc);calc();
+</script>
+</body>
+</html>
