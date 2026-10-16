@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Equipment Depreciation Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#eff4f0;--sf:#fff;--ink:#10241a;--mu:#586b5f;--ln:#d5e0d8;--ac:#15803d;--on:#fff;--m1:#15803d;--m2:#c98a12;--m3:#2563eb;--hd1:#0b3b22;--hd2:#15803d;--fd:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;--fb:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0a130e;--sf:#111e17;--ink:#e6f1e9;--mu:#92a89a;--ln:#24382c;--ac:#4ade80;--on:#08140c;--m1:#4ade80;--m2:#f2bd4b;--m3:#7ba7ff;--hd1:#06170d;--hd2:#14532d;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#0a130e;--sf:#111e17;--ink:#e6f1e9;--mu:#92a89a;--ln:#24382c;--ac:#4ade80;--on:#08140c;--m1:#4ade80;--m2:#f2bd4b;--m3:#7ba7ff;--hd1:#06170d;--hd2:#14532d;color-scheme:dark}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--fb)}
+h1,h2,b.n{font-family:var(--fd)}
+header{background:linear-gradient(120deg,var(--hd1),var(--hd2));color:#fff;padding:calc(22px + env(safe-area-inset-top,0px)) max(18px,4vw) 26px;position:relative;overflow:hidden}
+header:after{content:"";position:absolute;right:-40px;top:-60px;width:300px;height:300px;border-radius:50%;border:44px solid rgba(255,255,255,.07);box-shadow:0 0 0 44px rgba(255,255,255,.04)}
+header h1{margin:0;font-size:clamp(1.7rem,4vw,2.6rem);font-weight:800;letter-spacing:-.02em;position:relative}header p{margin:6px 0 0;opacity:.85;max-width:62ch;position:relative}
+.th{position:absolute;right:max(18px,4vw);top:calc(18px + env(safe-area-inset-top,0px));z-index:2;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);color:#fff;font-size:1rem;cursor:pointer}
+main{max-width:1240px;margin:0 auto;padding:20px max(14px,3vw) 40px}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.seg{display:inline-flex;border:1px solid var(--ln);border-radius:999px;overflow:hidden;background:var(--sf)}.seg button{border:0;background:none;color:var(--ink);padding:8px 18px;font:600 .9rem var(--fb);cursor:pointer}.seg button[aria-pressed=true]{background:var(--ac);color:var(--on)}
+.btn{border:1px solid var(--ln);background:var(--sf);color:var(--ink);border-radius:999px;padding:8px 16px;font:600 .88rem var(--fb);cursor:pointer}.btn.p{background:var(--ink);color:var(--bg);border-color:var(--ink)}.sp{flex:1}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}.k div{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:16px;border-top:4px solid var(--ac)}.k b{display:block;font:800 1.7rem/1.1 var(--fd);letter-spacing:-.02em}.k span{color:var(--mu);font-size:.85rem}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}.cd{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:16px;min-width:0}.cd h2{margin:0;font-size:1.05rem}.cd p{margin:2px 0 0;color:var(--mu);font-size:.85rem}.cd svg{width:100%;height:auto;display:block;margin-top:8px}
+.lg{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.8rem;color:var(--mu);margin-top:6px}.lg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.tw{overflow:auto;max-height:430px;margin-top:10px;border:1px solid var(--ln);border-radius:10px}table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:860px}th{position:sticky;top:0;background:var(--hd1);color:#fff;text-align:left;padding:9px 8px;font-weight:600;white-space:nowrap;z-index:1}td{padding:5px 8px;border-top:1px solid var(--ln)}tr.s td{background:color-mix(in srgb,var(--ac) 12%,var(--sf))}tr{cursor:pointer}
+input,select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--ln);border-radius:8px;padding:5px 7px;width:100%}input[type=number]{max-width:120px}td:nth-child(2) input{min-width:130px}td select{min-width:170px}
+.cu{display:inline-block;padding:2px 9px;border-radius:999px;background:var(--bg);border:1px solid var(--ln);font-weight:600;font-size:.78rem}.y1{font-weight:700;text-align:right;white-space:nowrap}
+.x{border:0;background:none;color:var(--mu);cursor:pointer;font-size:1rem}
+.nt{color:var(--mu);font-size:.82rem;margin-top:12px}footer{text-align:center;color:var(--mu);font-size:.85rem;padding:0 14px 30px}footer b{color:var(--ink)}
+@media(max-width:900px){.g{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><button class="th" id="th" aria-label="Switch light or dark theme">◐</button>
+<h1>Equipment Depreciation Studio</h1>
+<p>Three depreciation methods, two tax systems, one register. Edit any value and the schedule, charts and totals recalculate.</p></header>
+<main>
+<div class="bar"><div class="seg" id="seg" role="group" aria-label="Currency"></div><span class="sp"></span><button class="btn" id="add">+ Add equipment</button><button class="btn" id="rst">Reset sample</button><button class="btn p" id="csv">Export CSV</button></div>
+<div class="k" id="k"></div>
+<div class="g"><div class="cd"><h2>Fleet depreciation by year</h2><p id="s1"></p><svg id="c1" viewBox="0 0 560 280" role="img" aria-label="Stacked depreciation by year and method"></svg><div class="lg" id="l1"></div></div>
+<div class="cd"><h2 id="t2">Book value by method</h2><p>Select a row in the register to compare the three methods for that asset.</p><svg id="c2" viewBox="0 0 560 280" role="img" aria-label="Book value by year for each method"></svg><div class="lg" id="l2"></div></div></div>
+<div class="cd" style="margin-top:14px"><h2>Equipment register</h2><p>Inputs in the first columns. Currency follows the tax system. Year-1 depreciation matches the original workbook logic.</p>
+<div class="tw"><table><thead><tr><th>#</th><th>Equipment</th><th>Purchase value</th><th>Currency</th><th>Method</th><th>Tax system</th><th>Life (yrs)</th><th>Residual %</th><th style="text-align:right">Year-1 depreciation</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+<p class="nt">Tax adjustment, as in the original macro: Egyptian +5%, European Union −5% on each yearly charge, capped so total depreciation never exceeds purchase value minus residual. These factors are illustrative. Declining balance needs a residual above zero, so 1% is used when the field is 0.</p></div>
+</main>
+<footer>Generated and Developed by <b>Ahmed Mohsen Morad</b>, Senior Project Controls Engineer</footer>
+<script>
+const $=s=>document.querySelector(s),root=document.documentElement;
+try{const t=localStorage.getItem("th");if(t)root.dataset.theme=t}catch(e){}
+$("#th").onclick=()=>{const d=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme:dark)").matches,n=d?"light":"dark";root.dataset.theme=n;try{localStorage.setItem("th",n)}catch(e){}};
+const MET=["Straight Line","Arithmetic Degressive","Declining Balance"],TX=["Egyptian","European Union"],TF={"Egyptian":1.05,"European Union":.95},CU={"Egyptian":"EGP","European Union":"Euro"},MC=["var(--m1)","var(--m2)","var(--m3)"];
+const SEED=[["Excavator",1e5,2,0],["Bulldozer",15e4,2,1],["Crane",2e5,0,1],["Excavator",1e5,2,1],["Bulldozer",15e4,2,1],["Crane",2e5,1,1],["Excavator",2e6,1,0],["Bulldozer",15e4,0,1],["Crane",35e5,0,0],["Dump Truck",12e4,1,1],["Concrete Mixer",12e5,1,0],["Tower Crane",5e5,2,1],["Generator Set",8e5,0,0],["Backhoe Loader",6e4,2,1],["Asphalt Paver",9e5,1,0],["Road Roller",85e3,1,1],["Forklift",4e5,1,0],["Grader",18e4,0,1],["Hydraulic Breaker",75e4,0,0],["Wheel Loader",9e4,0,1],["Loader",2e6,0,0]];
+const mk=()=>SEED.map(a=>({n:a[0],pv:a[1],m:MET[a[2]],tx:TX[a[3]],life:5,res:10}));
+let rows=mk(),sel=0,cur="EGP";
+const f0=n=>Math.round(n).toLocaleString("en-US"),sh=v=>v>=1e6?(v/1e6).toFixed(1)+"M":v>=1e3?(v/1e3).toFixed(0)+"K":v.toFixed(0);
+function sch(r,m){const RV=r.pv*r.res/100,base=Math.max(0,r.pv-RV),n=Math.max(1,Math.round(r.life)||1),f=TF[r.tx],syd=n*(n+1)/2,rate=1-Math.pow((RV>0?RV:r.pv*.01)/r.pv,1/n),out=[];let rem=base,book=r.pv;
+for(let t=1;t<=n;t++){let d=m==MET[0]?base/n:m==MET[1]?base*(n-t+1)/syd:book*rate;d=Math.min(d*f,rem);out.push(d);rem-=d;book-=d}return out}
+function tbl(){$("#tb").innerHTML=rows.map((r,i)=>`<tr data-i="${i}" class="${i===sel?"s":""}"><td>${i+1}</td><td><input data-k="n" value="${r.n}"></td><td><input data-k="pv" type="number" min="0" value="${r.pv}"></td><td><span class="cu" id="cu${i}">${CU[r.tx]}</span></td><td><select data-k="m">${MET.map(m=>`<option${m==r.m?" selected":""}>${m}</option>`).join("")}</select></td><td><select data-k="tx">${TX.map(m=>`<option${m==r.tx?" selected":""}>${m}</option>`).join("")}</select></td><td><input data-k="life" type="number" min="1" max="30" value="${r.life}"></td><td><input data-k="res" type="number" min="0" max="90" step="any" value="${r.res}"></td><td class="y1" id="y${i}"></td><td><button class="x" data-d="1" aria-label="Delete row">✕</button></td></tr>`).join("");upd()}
+function upd(){
+$("#seg").innerHTML=["EGP","Euro"].map(c=>`<button type="button" aria-pressed="${c==cur}" data-c="${c}">${c}</button>`).join("");
+let n=0,pv=0,y1=0,ml=0;const by=[];
+rows.forEach((r,i)=>{const s=sch(r,r.m);$("#y"+i).textContent=f0(s[0]||0);$("#cu"+i).textContent=CU[r.tx];
+if(CU[r.tx]==cur){n++;pv+=r.pv;y1+=s[0]||0;ml=Math.max(ml,s.length);MET.forEach((m,j)=>sch(r,m).forEach((d,t)=>{(by[t]=by[t]||[0,0,0])[j]+=m==r.m?d:0}))}});
+$("#k").innerHTML=[[n,"Assets in "+cur],[f0(pv)+" "+cur,"Total purchase value"],[f0(y1)+" "+cur,"Year-1 depreciation"],[pv?(y1/pv*100).toFixed(1)+"%":"–","Year-1 charge on purchase value"]].map(a=>`<div><b class="n">${a[0]}</b><span>${a[1]}</span></div>`).join("");
+/* chart 1 */
+const W=560,H=280,L=48,R=10,T=14,B=30,mx=Math.max(1,...by.map(a=>a[0]+a[1]+a[2]))*1.08,Y=v=>T+(1-v/mx)*(H-T-B),bw=Math.min(60,(W-L-R)/Math.max(1,by.length)*.65);let g="";
+for(let k=0;k<=4;k++){const v=mx/1.08*k/4;g+=`<line x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--ln)"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end" font-size="11" fill="var(--mu)">${sh(v)}</text>`}
+by.forEach((a,t)=>{const x=L+(t+.5)*(W-L-R)/by.length-bw/2;let acc=0;a.forEach((v,j)=>{if(v>0){g+=`<rect x="${x}" y="${Y(acc+v)}" width="${bw}" height="${Y(acc)-Y(acc+v)}" fill="${MC[j]}"/>`}acc+=v});g+=`<text x="${x+bw/2}" y="${H-10}" text-anchor="middle" font-size="11" fill="var(--mu)">Yr ${t+1}</text>`});
+$("#c1").innerHTML=g;$("#s1").textContent="Charge per year in "+cur+", coloured by the method each asset uses.";$("#l1").innerHTML=MET.map((m,j)=>`<span><i style="background:${MC[j]}"></i>${m}</span>`).join("");
+/* chart 2 */
+const r=rows[sel];if(r){const n2=Math.max(1,Math.round(r.life)||1),ss=MET.map(m=>{let b=r.pv;return[r.pv,...sch(r,m).map(d=>b-=d)]}),L2=56,Xp=t=>L2+t/n2*(W-L2-R),Yp=v=>T+(1-v/(r.pv*1.05))*(H-T-B);let h="";
+for(let k=0;k<=4;k++){const v=r.pv*k/4;h+=`<line x1="${L2}" x2="${W-R}" y1="${Yp(v)}" y2="${Yp(v)}" stroke="var(--ln)"/><text x="${L2-6}" y="${Yp(v)+4}" text-anchor="end" font-size="11" fill="var(--mu)">${sh(v)}</text>`}
+for(let t=0;t<=n2;t++)h+=`<text x="${Xp(t)}" y="${H-10}" text-anchor="middle" font-size="11" fill="var(--mu)">${t}</text>`;
+ss.forEach((a,j)=>{const on=MET[j]==r.m;h+=`<path d="${a.map((v,t)=>(t?"L":"M")+Xp(t)+" "+Yp(v)).join("")}" fill="none" stroke="${MC[j]}" stroke-width="${on?4:2}" ${on?"":'stroke-dasharray="5 4"'} stroke-linejoin="round"/>`;if(on)a.forEach((v,t)=>h+=`<circle cx="${Xp(t)}" cy="${Yp(v)}" r="3.5" fill="${MC[j]}"/>`)});
+$("#c2").innerHTML=h;$("#t2").textContent="Book value: "+(r.n||"asset")+" ("+CU[r.tx]+")";$("#l2").innerHTML=MET.map((m,j)=>`<span><i style="background:${MC[j]}"></i>${m}${m==r.m?" (selected)":""}</span>`).join("")}}
+$("#tb").addEventListener("input",e=>{const tr=e.target.closest("tr"),k=e.target.dataset.k;if(!tr||!k)return;const r=rows[+tr.dataset.i];r[k]=e.target.type=="number"?+e.target.value:e.target.value;upd()});
+$("#tb").addEventListener("click",e=>{const tr=e.target.closest("tr");if(!tr)return;const i=+tr.dataset.i;if(e.target.dataset.d){rows.splice(i,1);sel=Math.max(0,Math.min(sel,rows.length-1));tbl();return}if(sel!==i){sel=i;[...document.querySelectorAll("#tb tr")].forEach((t,j)=>t.classList.toggle("s",j===i));upd()}});
+$("#seg").addEventListener("click",e=>{const c=e.target.dataset.c;if(c){cur=c;upd()}});
+$("#add").onclick=()=>{rows.push({n:"New equipment",pv:1e6,m:MET[0],tx:TX[0],life:5,res:10});sel=rows.length-1;tbl();$("#tb").lastElementChild.scrollIntoView({block:"nearest"})};
+$("#rst").onclick=()=>{rows=mk();sel=0;tbl()};
+$("#csv").onclick=()=>{const q=v=>'"'+String(v).replace(/"/g,'""')+'"',c=["Equipment,Purchase value,Currency,Method,Tax system,Useful life,Residual %,Year-1 depreciation"];rows.forEach(r=>c.push([q(r.n),r.pv,CU[r.tx],q(r.m),q(r.tx),r.life,r.res,Math.round((sch(r,r.m)[0]||0)*100)/100].join(",")));const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([c.join("\n")],{type:"text/csv"}));a.download="depreciation-register.csv";a.click()};
+tbl();
+</script>
+</body>
+</html>
